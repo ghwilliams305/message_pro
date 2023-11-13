@@ -1,6 +1,6 @@
 //Setting up a word bank
 const verbs = ['am', 'radiate', 'choose', 'trust', 'attract', 'love'];
-const abjectives = ['confident', 'worthy', 'enough', 'postive', 'successful', 'strong', 'limitless', 'resilient', 'attractive'];
+const adjectives = ['confident', 'worthy', 'enough', 'postive', 'successful', 'strong', 'limitless', 'resilient', 'attractive'];
 const traits = ['love', 'confidence', 'positive energy', 'gratude', 'harmony', 'peace', 'greatness', 'beauty'];
 const objects = ['my ability', 'my family', 'myself', 'my mind', 'my body', 'my soul'];
 
@@ -10,9 +10,9 @@ const randWord = (array) => array[Math.floor(Math.random() * array.length)];
 //An object that returns a list of set sentences structures
 const sentenceStructure = {
     'am' : [
-        ['I', 'am', '*abjectives'],
-        ['I', 'am', '*abjectives', 'in', '*objects'],
-        ['I', 'am', '*abjectives', 'of', '*traits']
+        ['I', 'am', '*adjectives'],
+        ['I', 'am', '*adjectives', 'in', '*objects'],
+        ['I', 'am', '*adjectives', 'of', '*traits']
     ],
     'radiate' : [
         ['I', 'radiate', '*traits'],
@@ -32,42 +32,25 @@ const sentenceStructure = {
     'attract' : [
         ['I', 'attract', '*traits'],
         ['I', 'attract', '*traits', 'in', '*objects'],
-        ['I', 'attract', '*abjectives', 'people', 'in', 'my', 'life']
+        ['I', 'attract', '*adjectives', 'people', 'in', 'my', 'life']
     ],
     'love' : [
         ['I', 'love', '*objects'],
         ['I', 'love', '*traits'],
-        ['I', 'love', 'that', 'I', 'am', '*abjectives']
+        ['I', 'love', 'that', 'I', 'am', '*adjectives']
     ]
 }
 
 //Inserts words into sentences
 const insertWords = (sentence) => sentence.map((word) => {
-    if(word === "*abjectives") return randWord(abjectives);
+    if(word === "*adjectives") return randWord(adjectives);
     if(word === "*traits") return randWord(traits);
     if(word === "*objects") return randWord(objects);
     return word;
 });
 
-//testing values of word banks
-console.log(`verbs = ${verbs}`);
-console.log(`abjectives = ${abjectives}`);
-console.log(`traits = ${traits}`);
-console.log(`objects = ${objects}`);
+//Makes it a sentences
+const sentConstruc = (sentence) => sentence.join(' ') + '.';
 
-//testing randWord Function
-for(let x = 0; x < 9; x++) console.log(`randWord(verbs) => ${randWord(verbs)}`);
-
-//testing the sentenceStructure object
-for(let x = 0; x < 9; x++) {
-    const theVerb = randWord(verbs);
-    const sentenceNumber = Math.floor(Math.random() * 3);
-    console.log(`sentenceStructure[${theVerb}][${sentenceNumber}] = ${sentenceStructure[theVerb][sentenceNumber]}`);
-}
-
-//Testing the insertWords function
-for(let x = 0; x < 3; x++) {
-    const theVerb = randWord(verbs);
-    const sentenceNumber = Math.floor(Math.random() * 3);
-    console.log(`insertWords(sentenceStructure[${theVerb}][${sentenceNumber}]) => ${insertWords(sentenceStructure[theVerb][sentenceNumber])}`);
-}
+//Prints 5 affirmations
+for(let x = 0; x < 5; x++) console.log(sentConstruc(insertWords(sentenceStructure[randWord(verbs)][Math.floor(Math.random() * 3)])));
