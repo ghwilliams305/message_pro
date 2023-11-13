@@ -41,6 +41,14 @@ const sentenceStructure = {
     ]
 }
 
+//Inserts words into sentences
+const insertWords = (sentence) => sentence.map((word) => {
+    if(word === "*abjectives") return randWord(abjectives);
+    if(word === "*traits") return randWord(traits);
+    if(word === "*objects") return randWord(objects);
+    return word;
+});
+
 //testing values of word banks
 console.log(`verbs = ${verbs}`);
 console.log(`abjectives = ${abjectives}`);
@@ -55,4 +63,11 @@ for(let x = 0; x < 9; x++) {
     const theVerb = randWord(verbs);
     const sentenceNumber = Math.floor(Math.random() * 3);
     console.log(`sentenceStructure[${theVerb}][${sentenceNumber}] = ${sentenceStructure[theVerb][sentenceNumber]}`);
+}
+
+//Testing the insertWords function
+for(let x = 0; x < 3; x++) {
+    const theVerb = randWord(verbs);
+    const sentenceNumber = Math.floor(Math.random() * 3);
+    console.log(`insertWords(sentenceStructure[${theVerb}][${sentenceNumber}]) => ${insertWords(sentenceStructure[theVerb][sentenceNumber])}`);
 }
